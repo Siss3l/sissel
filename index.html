@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Python SVG avatars in the Browser with WebAssembly"/>
+    <link rel="canonical" href="/url"/>
+    <link rel="icon" type="image/x-icon" href="/src/favicon.ico"/>
+    <link rel="apple-touch-icon" href="src/favicon.ico"/>
+    <title>Myriad</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <svg id="loader" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 120 120" xml:space="preserve">
+      <defs>
+        <path id="cpath" d="M87.417 78.237a7.703 7.703 0 0 0-.666-.685 7.53 7.53 0 0 0-9.948-.149h-.002l-.002-.001a22.49 22.49 0 0 1-14.666 5.413c-12.474 0-22.586-10.111-22.586-22.585s10.112-22.585 22.586-22.585a22.49 22.49 0 0 1 14.64 5.391l.004-.003a7.53 7.53 0 1 0 9.805-11.425c-.009-.008-.02-.015-.028-.024a37.498 37.498 0 0 0-24.421-8.997c-20.789 0-37.643 16.854-37.643 37.643 0 20.788 16.854 37.642 37.643 37.642a37.5 37.5 0 0 0 24.419-8.993l.032-.029.018-.016a7.527 7.527 0 0 0 .815-10.597z"/>
+      </defs>
+      <clipPath id="cshape">
+        <use xlink:href="#cpath" overflow="visible"/>
+      </clipPath>
+      <g clip-path="url(#cshape)">
+        <path fill="#3E2D54" d="M0 0h40.289v120H0z"/>
+        <path fill="#40587B" d="M39.289 0h16.057v120H39.289z"/>
+        <path fill="#4D90A3" d="M54.346 0h16.057v120H54.346z"/>
+        <path fill="#7CB694" d="M69.403 0H85.46v120H69.403z"/>
+        <path fill="#DCD280" d="M84.46 0H120v120H84.46z"/>
+      </g>
+    </svg>
+    <div id="tsparticles"></div>
+    <div id="root"></div>
+    <div id="console"></div>
+    <script type="module" src="/src/main.jsx" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </body>
+</html>
