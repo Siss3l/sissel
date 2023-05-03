@@ -1,2 +1,2 @@
-# sissel.github.io
+# Terminal
 Python terminal with WebAssembly
