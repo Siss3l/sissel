@@ -1,0 +1,94 @@
+body {
+  height: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -o-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  background-color: #0D1321; /** Delayed */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#tsparticles {
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.terminal {
+  position: relative;
+  z-index: 0;
+  /**
+  background-size: 600% 600%;
+  background: linear-gradient(0deg, #0F2027, #0D1321, #06050C);
+  -webkit-animation: Gradient 30s ease infinite;
+  -moz-animation: Gradient 30s ease infinite;
+  -ms-animation: Gradient 30s ease infinite;
+  -o-animation: Gradient 30s ease infinite;
+  animation: Gradient 30s ease infinite;
+  */
+}
+
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 50% 0;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0;
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 50% 0;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0;
+  }
+}
+
+@-o-keyframes Gradient {
+  0% {
+    background-position: 50% 0;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0;
+  }
+}
+
+@-ms-keyframes Gradient {
+  0% {
+    background-position: 50% 0;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0;
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 50% 0;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0;
+  }
+}

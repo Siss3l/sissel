@@ -1,0 +1,128 @@
+#loader {
+  /** Loading loop animation */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: auto;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+
+  path {
+    animation: none 1.5s linear infinite;
+    display: inline-block;
+    animation-play-state: running;
+
+    &:nth-child(1) {
+      animation-name: Loader1;
+    }
+
+    &:nth-child(2) {
+      animation-name: Loader2;
+    }
+
+    &:nth-child(3) {
+      animation-name: Loader3;
+    }
+
+    &:nth-child(4) {
+      animation-name: Loader4;
+    }
+
+    &:nth-child(5) {
+      animation-name: Loader5;
+    }
+  }
+}
+
+.fading {
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+#cshape {
+  animation: Loader 1.5s linear infinite;
+  transform-origin: 62.1px 60.3px;
+  animation-play-state: running;
+}
+
+@media only screen and (max-width: 600px) {
+  #loader {
+    margin: auto !important; /** Mobile responsive */
+  }
+}
+
+@keyframes Loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes Loader1 {
+  0% {
+    fill: #3E2C53;
+  }
+
+  33.3333% {
+    fill: #AC2B61;
+  }
+
+  66.6666% {
+    fill: #F3E3B4;
+  }
+}
+
+@keyframes Loader2 {
+  0% {
+    fill: #3F577A;
+  }
+
+  33.3333% {
+    fill: #E33D5F;
+  }
+
+  66.6666% {
+    fill: #BADCC8;
+  }
+}
+
+@keyframes Loader3 {
+  0% {
+    fill: #4C8FA2;
+  }
+
+  33.3333% {
+    fill: #EF7C5E;
+  }
+
+  66.6666% {
+    fill: #7FC7BF;
+  }
+}
+
+@keyframes Loader4 {
+  0% {
+    fill: #7BB594;
+  }
+
+  33.3333% {
+    fill: #F9C65F;
+  }
+
+  66.6666% {
+    fill: #EE7B73;
+  }
+}
+
+@keyframes Loader5 {
+  0% {
+    fill: #DBD17F;
+  }
+
+  33.3333% {
+    fill: #F5EF9E;
+  }
+
+  66.6666% {
+    fill: #D4385F;
+  }
+}

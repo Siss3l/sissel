@@ -1,0 +1,137 @@
+.xterm {
+  cursor: text;
+  position: relative;
+  user-select: none;
+  -ms-user-select: none; /** For IE compatibility */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  &.focus,
+  &:focus {
+    outline: none;
+  }
+  .xterm-helpers {
+    position: absolute;
+    top: 0;
+    z-index: 5;
+  }
+  .xterm-helper-textarea {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    /** Move textarea out of the screen to the far left, so that the cursor is not visible */
+    position: absolute;
+    opacity: 0;
+    left: -9999em;
+    top: 0;
+    width: 0;
+    height: 0;
+    z-index: -5;
+    white-space: nowrap;
+    overflow: hidden;
+    resize: none;
+  }
+  .composition-view {
+    background: transparent;
+    color: #FFF;
+    display: none;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 1;
+    &.active {
+      display: block;
+    }
+  }
+  .xterm-viewport {
+    overflow-y: auto; /** On MacOS it is required in order for the scroll bar to appear fully opaque */
+    background-color: transparent;
+    cursor: default;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .xterm-screen {
+    position: relative;
+    canvas {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  &-screen .xterm-decoration-container .xterm-decoration {
+    z-index: 6;
+    position: absolute;
+  }
+  .xterm-scroll-area {
+    visibility: hidden;
+  }
+  &-char-measure-element {
+    display: inline-block;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: -9999em;
+    line-height: normal;
+  }
+  &.enable-mouse-events {
+    cursor: default; /** When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
+  }
+  &.xterm-cursor-pointer,
+  .xterm-cursor-pointer {
+    cursor: pointer;
+  }
+  &.column-select.focus {
+    cursor: crosshair;
+  }
+  .xterm-accessibility,
+  .xterm-message {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    color: transparent;
+  }
+  .live-region {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  &-dim {
+    opacity: 0.5;
+  }
+  &-underline-1 {
+    text-decoration: underline;
+  }
+  &-underline-2 {
+    text-decoration: double underline;
+  }
+  &-underline-3 {
+    text-decoration: wavy underline;
+  }
+  &-underline-4 {
+    text-decoration: dotted underline;
+  }
+  &-underline-5 {
+    text-decoration: dashed underline;
+  }
+  &-strikethrough {
+    text-decoration: line-through;
+  }
+  &-decoration-overview-ruler {
+    z-index: 7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    pointer-events: none;
+  }
+  &-decoration-top {
+    z-index: 2;
+    position: relative;
+  }
+}
