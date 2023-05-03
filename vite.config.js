@@ -12,7 +12,7 @@ export default defineConfig({
    * @asyncWebAssembly null
    * @default UserConfigExport
    */
-  build: {
+  build: { // base
     sourcemap: false,
     rollupOptions: {
       output: {
