@@ -41,7 +41,7 @@ export async function initialize() {
      */
     try {
         self.pyodide = await loadPyodide({
-            indexURL: "/assets/", stdout: (msg) => {
+            indexURL: "/sissel/assets/", stdout: (msg) => {
                 self.term.write(`\n${msg}`);
             }, fullStdLib: false
         });
