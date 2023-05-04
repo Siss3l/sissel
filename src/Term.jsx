@@ -127,7 +127,7 @@ const bind = () => {
         fontWeight: 400,
         fontWeightBold: 700,
         logLevel: "off",
-        rows: 30,
+        rows: 40,
         screenReaderMode: false,
         scrollSensitivity: 1,
         termName: "Terminal",
