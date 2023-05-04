@@ -136,7 +136,7 @@ const bind = () => {
 
     self.idx = 0;
     self.isMode = false; /* useState, useContext */
-    const [audio, store] = [new Audio("/assets/wii.ogg"), new Map([["idx", {i: -1}], ["val", JSON.parse(localStorage.getItem("commands"))]])];
+    const [audio, store] = [new Audio("/sissel/assets/wii.ogg"), new Map([["idx", {i: -1}], ["val", JSON.parse(localStorage.getItem("commands"))]])];
     let [command, state, tab] = ["", [false, false], 0];
     self.term.open(document.getElementById("console")); // No FitAddon
 
