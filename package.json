@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "license": "CC BY-NC-ND 4.0",
-  "homepage": ".",
+  "homepage": "https://siss3l.github.io/sissel/",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
