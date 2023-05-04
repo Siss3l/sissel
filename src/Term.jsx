@@ -74,12 +74,12 @@ export async function generation() {
         from os import _exit; from pathlib import Path; from sys import modules
         modules["antigravity"] = None; fbz, apy = Path("/home/pyodide/final.bz2"), Path("/home/pyodide/aesthetic.py")
         if not fbz.exists():
-          final = (await (await fetch("/assets/final.bz2")).arrayBuffer()).to_py()
+          final = (await (await fetch("/sissel/assets/final.bz2")).arrayBuffer()).to_py()
           if blake2b(final).hexdigest() == "54b6213e47effb93aa6aeddeef8f3a1281b3e4be2c86d5c76021be36bbd7a2800a8731494b380c605c81696f6916d6a7cbc5cbe51e51fbc8965a42e4b2291319": fbz.write_bytes(final)
           else: del final
         elif blake2b(fbz.read_bytes()).hexdigest() != "54b6213e47effb93aa6aeddeef8f3a1281b3e4be2c86d5c76021be36bbd7a2800a8731494b380c605c81696f6916d6a7cbc5cbe51e51fbc8965a42e4b2291319": _exit(0)
         if not apy.exists():  # FileNotFoundError
-          ast   = (await (await fetch("/assets/aesthetic.py")).arrayBuffer()).to_py()  
+          ast   = (await (await fetch("/sissel/assets/aesthetic.py")).arrayBuffer()).to_py()  
           if blake2b(ast).hexdigest() == "55897b372cba4eaad9f6980251468cadacb29cd2751e175f329ef501bc66ed9ef64f1b416bb3a39e4ad0441ac59c20a993743c9a0e0db43212f0f2e7fe4be82e": apy.write_bytes(ast)
           else: del apy
         elif blake2b(apy.read_bytes()).hexdigest() != "55897b372cba4eaad9f6980251468cadacb29cd2751e175f329ef501bc66ed9ef64f1b416bb3a39e4ad0441ac59c20a993743c9a0e0db43212f0f2e7fe4be82e": _exit(0)
