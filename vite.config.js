@@ -12,7 +12,8 @@ export default defineConfig({
    * @asyncWebAssembly null
    * @default UserConfigExport
    */
-  build: { // base
+  base: "/sissel/",
+  build: {
     sourcemap: false,
     rollupOptions: {
       output: {
