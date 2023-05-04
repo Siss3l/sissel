@@ -6,9 +6,7 @@
   "homepage": "https://siss3l.github.io/sissel/",
   "scripts": {
     "dev": "vite",
-    "preview": "vite preview",
-    "build": "vite build",
-    "open": "npm node --trace-warnings vite --host"
+    "build": "vite build"
   },
   "dependencies": {
     "pyodide": "^0.23.2",
