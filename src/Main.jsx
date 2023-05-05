@@ -7,7 +7,7 @@ import "./Index.scss"
 import "./Loading.scss"
 
 
-console.log = () => {};
+console.debug = () => {};
 if (window?.trustedTypes?.createPolicy) {
   /**
    * Some web browsers require `TrustedScriptURL` assignment shenanigans.
