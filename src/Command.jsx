@@ -122,7 +122,7 @@ const commands = {
                 0YEtuamAlS3VgNmV+YElsfmBILnNgIGZ+YFglYmA3MlFgRGxcYDZcfmBceX5gSylzYCJdfWBdZDNgI1x+YDE4emBhZX5gXFRVYCdJcGBiQ0BgRF9+YGJxbWBmUX5gYkluYE1MV2BnI0xgRG5pYEFNfmA/PX5gayBnYE1FVmAkOk1gWzB+YG9vfmBwd35gXmJ+YChVfmAoVX5gdSJ+YChVfmAoVX5gMi1+YDItfmB5YX5gMi1+YDJNXmBARH5gO2V+YHlhfmA7ZX5
                 gPDVOYEU9fmBudH5geWF+YF02fmBFYVpgTm9+YE5vfmBOb35geV5+YGcgVWBYPX5gWD1+YFg9fmBeYn5gcD9kYGFvfmBhb35gYW9+YGFvfmBmZHNga0V+YGtFfmBsZ35gbnd+YHR1fmB0dX5geWd+YHR1fmB0enlgeVp+YFtLbGBmZH5geVp+YDZlfmAoSX5gUVx+YHBVaGAoSX5gNmZ9YGthaGBqKX5gXmN+YC0+cmA2Z3xgcSBbYG50fmBxPn5gIXt+YDc5SmB
                 jU35geihUYHR1fmAoPm1gIj1pYHcyPWBwaD9gQ1R2YDJYaWB5YX5geXFHYCI8d2BwR2BgdC9pYHVeaWB5YX5geXFHYHYlaWBwKX5gfGR+YHlhfmAgZn5gcF59MG0=`.trim();
-                const lz = decompressLZ77(window.atob(demoSVG))?.replace(/[.]/gm, "\x1b") || "";
+                const lz = decompressLZ77(window.atob(demoSVG))?.replace(/[.]/gm, "\x1b") || ""; // no URL here
                 if (lz) {
                     self.term.write(`\n${lz}\n\r>>> `);
                 }
@@ -214,7 +214,7 @@ const commands = {
             if (self.pyodide) {
                 self.term.runPythonCode(`f'Python {__import__("sys").version} on {__import__("sys").platform}\\nType "help", "copyright", "credits" or "license" for more information.'`).then(null);
             } else {
-                self.term.write('Python 3.11.2 (main, May  3 2023, 04:00:05) [Clang 17.0.0 (https://github.com/llvm/llvm-project df82394e7a2d06506718cafa347b on emscripten\nType "help", "copyright", "credits" or "license" for more information.');
+                self.term.write('\nPython 3.11.2 (main, May  3 2023, 04:00:05) [Clang 17.0.0 (https://github.com/llvm/llvm-project df82394e7a2d06506718cafa347b on emscripten\nType "help", "copyright", "credits" or "license" for more information.\n\r>>> ');
             }
         },
         description: i18next?.t("help.version")
