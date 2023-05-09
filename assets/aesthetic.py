@@ -13,6 +13,7 @@ from tempfile import gettempdir
 from typing import Iterator, NoReturn, Union
 from xml.etree.ElementTree import fromstring, tostring, ElementTree
 
+
 if "emscripten" in getattr(uname(), "system", "").casefold():  # At runtime
     FILE = (__file__ := "/home/pyodide/") + "final.bz2"
 
@@ -30,7 +31,7 @@ if "emscripten" in getattr(uname(), "system", "").casefold():  # At runtime
 
 try:
     p = (Path(__file__).parent / f"{FILE if 'FILE' in globals() else 'final.bz2'}").read_bytes()  # hexdigest
-    values, colors = loads(decompress(b"BZh" + p.split(b"BZh")[1])), loads(decompress(b"BZh" + p.split(b"BZh")[2]))
+    values, colors = loads(decompress(b"BZh" + p.split(b"BZh")[1])), loads(decompress(b"BZh" + p.split(b"BZh")[2]))  # Sets()
 except (FileNotFoundError, OSError, PermissionError, SyntaxError, TypeError, ValueError) as e:
     raise e from e
 
@@ -54,7 +55,7 @@ def make() -> Union[bool, bytes, str, None]:
     """
     try:
         ska = Scalable()
-        shuffle(values)  # `shuffle` will be removed in version 3.11
+        # shuffle(values) tuple `shuffle` will be removed in version 3.11
         res = choices(values)[0]
         tree = ElementTree(fromstring(ska.svg)).getroot()  # No namespaces
         for idx, k in enumerate(tree.findall(
@@ -83,7 +84,7 @@ class Scalable:
                             "  <use n:href='#s' transform='matrix(1 0 0 -1 0 320)'/>\n",
                             "  <use n:href='#s' transform='matrix(-1 0 0 1 320 0)'/>\n",
                             "  <use n:href='#s' transform='rotate(180 160 160)'/>\n</svg>"))
-        self.out = self.generate(32, choices([4, 5], weights=[.2, .8], k=1)[0])  # Applicable with Numpy, Numba
+        self.out = self.generate(32, choices([4, 5], weights=[.2, .8], k=1)[0])
 
     @staticmethod
     def accelerate_asc(nio: int) -> Iterator[list]:
@@ -91,9 +92,7 @@ class Scalable:
         Redistribution of lists to balance non-proportional values, similar to the Voronoi diagram.
         :long_url: https://en.wikipedia.org/wiki/Tessellation
         """
-        zio = [0] * (nio + 1)
-        k = 1
-        yio = nio - 1
+        zio, yio, k = [0 for _ in range(nio + 1)], nio - 1, 1
         while k != 0:
             xio = zio[k - 1] + 1
             k -= 1
@@ -119,13 +118,9 @@ class Scalable:
         :long_url: https://en.wikipedia.org/wiki/Harmony_(color)
         :rtype: dict
         """
-        parts: Iterator[list] = self.accelerate_asc(total)
-        output = [partition for partition in parts if len(partition) == nio and 1 not in partition]
-        rio = choices(output)[0]
-        shuffle(rio)
-        _ = self.generate(total, nio) if not all(_ <= 17 for _ in rio) else False  # Heterogeneity
-        assert sum(rio) == total, print("Different sizes")
-        assert not nio >= 6, print("Too big for colors")
+        out = [partition for partition in self.accelerate_asc(total) if all(_ <= 17 for _ in partition) and len(partition) == nio and 1 not in partition]
+        rio = choices(out)[0]
+        # shuffle(rio)
         shuffle(colors)
         return dict(zip(choices(colors)[0], rio))
 
@@ -134,7 +129,6 @@ class Scalable:
         Manipulating dictionary of color strings with their respective amounts.
         :rtype: str
         """
-        assert self.out, print("Sample is negative")
         rio = sample(list(self.out.items()), 1)[0][0]
         dio = {k: v - 1 if k == rio else self.out[k] for k, v in self.out.items()}
         self.out = {k: v for k, v in dio.items() if v}
@@ -194,8 +188,6 @@ class ReaderPNG:
             return bytearray(bs)
         if self.bitdepth == 16:
             return [int.from_bytes((chr(pn) + chr(bs[1::2][i])).encode(), "big") for i, pn in enumerate(bs[::2])]
-
-        assert self.bitdepth < 8
         if width is None:
             width = self.width
         spb = 8 // self.bitdepth
@@ -220,7 +212,6 @@ class ReaderPNG:
                 yield recon
         if len(a) != 0:
             raise Exception("Wrong size for decompressed IDAT chunk.")
-        assert len(a) == 0
 
     def validate_signature(self):
         if self.signature:
