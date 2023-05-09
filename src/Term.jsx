@@ -9,9 +9,9 @@ import "./Xterm.scss";
 
 export const log = () => {
     console.log.apply(JSON.stringify(console), arguments);
-};
+}
 
-export async function sleep(s) {
+export sleep = async (s) => {
     return new Promise(res => setTimeout(res, s));
 }
 
@@ -80,9 +80,9 @@ export async function generation() {
         elif blake2b(fbz.read_bytes()).hexdigest() != "54b6213e47effb93aa6aeddeef8f3a1281b3e4be2c86d5c76021be36bbd7a2800a8731494b380c605c81696f6916d6a7cbc5cbe51e51fbc8965a42e4b2291319": _exit(0)
         if not apy.exists():  # FileNotFoundError
           ast   = (await (await fetch("/sissel/assets/aesthetic.py")).arrayBuffer()).to_py()  
-          if blake2b(ast).hexdigest() == "55897b372cba4eaad9f6980251468cadacb29cd2751e175f329ef501bc66ed9ef64f1b416bb3a39e4ad0441ac59c20a993743c9a0e0db43212f0f2e7fe4be82e": apy.write_bytes(ast)
+          if blake2b(ast).hexdigest() == "7d12f098493db90e264c1260a260267aac68be4b9cabe39590cdcead5453cd32495991f0b7f10fa5a3e6af9a40ca02ffd06f6d61e340dcc7fe4945cfbd727182": apy.write_bytes(ast)
           else: del apy
-        elif blake2b(apy.read_bytes()).hexdigest() != "55897b372cba4eaad9f6980251468cadacb29cd2751e175f329ef501bc66ed9ef64f1b416bb3a39e4ad0441ac59c20a993743c9a0e0db43212f0f2e7fe4be82e": _exit(0)
+        elif blake2b(apy.read_bytes()).hexdigest() != "7d12f098493db90e264c1260a260267aac68be4b9cabe39590cdcead5453cd32495991f0b7f10fa5a3e6af9a40ca02ffd06f6d61e340dcc7fe4945cfbd727182": _exit(0)
         if not modules.get("aesthetic"):
           spec  = util.spec_from_file_location("aesthetic", "/home/pyodide/aesthetic.py")
           asc   = util.module_from_spec(spec)
@@ -216,10 +216,6 @@ const bind = () => {
         await self.pyodide.runPythonAsync(code).then(self.term.handlePythonResult, self.term.handlePythonError).catch(console.error);
         return true;
     }
-
-    // todo https://cyber-guy.gitbook.io/cyber-guys-blog/blogs/the-art-of-vulnerability-chaining-pyscript CSP
-    // todo Same-Origin Policy X-Frame-Header protection
-    // todo pip-compile --generate-hashes .. Hash of all files ? or final/aesthetic.py ?? yarn gen
 
     if (i18next) {
         self.term.write(`${i18next?.t("home")}\r\n>>> `);
@@ -370,7 +366,7 @@ const bind = () => {
                 const elt = document.querySelector(".xterm-helper-textarea");
                 const setter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, "value")?.set;
                 setter?.call(elt, "value"); // throw new TypeError(elt.dispatchEvent(new Event("input", {bubbles: true})));
-                throw new TypeError(""); // Hackish way without breaking
+                throw new TypeError(""); // Hackish way without breaking on Firefox
             case "\x1b\r": // Alt + Enter
                 command += "\n";
                 self.term.write("\n");
