@@ -62,7 +62,7 @@ export async function generation() {
      * generated from the aesthetic Python script to a PNG image
      * with JavaScript in order to be displayable on the `Terminal`.
      *
-     * @todo optimization
+     * @todo Optimization
      * @async true
      * @default null
      */
