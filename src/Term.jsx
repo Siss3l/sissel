@@ -80,9 +80,9 @@ export async function generation() {
         elif blake2b(fbz.read_bytes()).hexdigest() != "54b6213e47effb93aa6aeddeef8f3a1281b3e4be2c86d5c76021be36bbd7a2800a8731494b380c605c81696f6916d6a7cbc5cbe51e51fbc8965a42e4b2291319": _exit(0)
         if not apy.exists():  # FileNotFoundError
           ast   = (await (await fetch("/sissel/assets/aesthetic.py")).arrayBuffer()).to_py()  
-          if blake2b(ast).hexdigest() == "5d625897251d1821a500760fb54781757bd9cc831e0418c6956bad4461d732d1e3be499261f6f7f2b5bfc8b899330c29bfd6745a09c6bd50c234fb9793b387fe": apy.write_bytes(ast)
+          if blake2b(ast).hexdigest() == "77f62cf6166c5696ce35aeb910aa75ed1a9e7371fdf7e4253aa7fb3010e91395f154d6adca12688ab23bcbbdfa82d95d8b34daca0fb3ec85c7310c73d9b5c0da": apy.write_bytes(ast)
           else: del apy
-        elif blake2b(apy.read_bytes()).hexdigest() != "5d625897251d1821a500760fb54781757bd9cc831e0418c6956bad4461d732d1e3be499261f6f7f2b5bfc8b899330c29bfd6745a09c6bd50c234fb9793b387fe": _exit(0)
+        elif blake2b(apy.read_bytes()).hexdigest() != "77f62cf6166c5696ce35aeb910aa75ed1a9e7371fdf7e4253aa7fb3010e91395f154d6adca12688ab23bcbbdfa82d95d8b34daca0fb3ec85c7310c73d9b5c0da": _exit(0)
         if not modules.get("aesthetic"):
           spec  = util.spec_from_file_location("aesthetic", "/home/pyodide/aesthetic.py")
           asc   = util.module_from_spec(spec)
