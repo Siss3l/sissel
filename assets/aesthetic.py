@@ -8,7 +8,7 @@ from hashlib import blake2b
 from pathlib import Path
 from pickle import loads
 from platform import uname
-from random import choices, sample, shuffle
+from random import choices, shuffle
 from tempfile import gettempdir
 from typing import Iterator, NoReturn, Union
 from xml.etree.ElementTree import fromstring, tostring, ElementTree
@@ -30,8 +30,8 @@ if "emscripten" in getattr(uname(), "system", "").casefold():  # At runtime
         ]
 
 try:
-    p = (Path(__file__).parent / f"{FILE if 'FILE' in globals() else 'final.bz2'}").read_bytes()  # hexdigest
-    values, colors = loads(decompress(b"BZh" + p.split(b"BZh")[1])), loads(decompress(b"BZh" + p.split(b"BZh")[2]))  # Sets()
+    p = (Path(__file__).parent / f"{FILE if 'FILE' in globals() else 'final.bz2'}").read_bytes()  # By convenience
+    values, colors = loads(decompress(b"BZh" + p.split(b"BZh")[1])), loads(decompress(b"BZh" + p.split(b"BZh")[2]))  # No sets
 except (FileNotFoundError, OSError, PermissionError, SyntaxError, TypeError, ValueError) as e:
     raise e from e
 
@@ -42,8 +42,8 @@ def demo(final: bytes) -> str:
     """
     try:
         filename = f"{gettempdir()}/{blake2b(final).hexdigest()}.svg"
-        with open(filename, "wb") as fio:
-            fio.write(final)
+        with open(filename, "wb") as f:
+            f.write(final)
         return filename
     except (AttributeError, NameError, PermissionError, TypeError) as err:
         raise err from err
@@ -55,7 +55,6 @@ def make() -> Union[bool, bytes, str, None]:
     """
     try:
         ska = Scalable()
-        # shuffle(values) tuple `shuffle` will be removed in version 3.11
         res = choices(values)[0]
         tree = ElementTree(fromstring(ska.svg)).getroot()  # No namespaces
         for idx, k in enumerate(tree.findall(
@@ -87,52 +86,50 @@ class Scalable:
         self.out = self.generate(32, choices([4, 5], weights=[.2, .8], k=1)[0])
 
     @staticmethod
-    def accelerate_asc(nio: int) -> Iterator[list]:
+    def accelerate_asc(n: int) -> Iterator[list]:
         """
         Redistribution of lists to balance non-proportional values, similar to the Voronoi diagram.
         :long_url: https://en.wikipedia.org/wiki/Tessellation
         """
-        zio, yio, k = [0 for _ in range(nio + 1)], nio - 1, 1
+        z, y, k = [0 for _ in range(n + 1)], n - 1, 1
         while k != 0:
-            xio = zio[k - 1] + 1
+            x = z[k - 1] + 1
             k -= 1
-            while 2 * xio <= yio:
-                zio[k] = xio
-                yio -= xio
+            while 2 * x <= y:
+                z[k] = x
+                y -= x
                 k += 1
-            tio = k + 1
-            while xio <= yio:
-                zio[k] = xio
-                zio[tio] = yio
-                yield zio[:k + 2]
-                xio += 1
-                yio -= 1
-            zio[k] = xio + yio
-            yio = xio + yio - 1
-            yield zio[:k + 1]
+            while x <= y:
+                z[k] = x
+                z[k + 1] = y
+                yield z[:k + 2]
+                x += 1
+                y -= 1
+            z[k] = x + y
+            y = x + y - 1
+            yield z[:k + 1]
 
     @lru_cache(0)
-    def generate(self, total: int, nio: int) -> dict:
+    def generate(self, total: int, n: int) -> dict:
         """
         A palette of color combinations that tends to be aesthetically pleasing.
         :long_url: https://en.wikipedia.org/wiki/Harmony_(color)
         :rtype: dict
         """
-        out = [partition for partition in self.accelerate_asc(total) if all(_ <= 17 for _ in partition) and len(partition) == nio and 1 not in partition]
-        rio = choices(out)[0]
-        # shuffle(rio)
-        shuffle(colors)
-        return dict(zip(choices(colors)[0], rio))
+        out = [p for p in self.accelerate_asc(total) if all(_ <= 17 for _ in p) and len(p) == n and 1 not in p]
+        r = choices(out)[0]
+        shuffle(colors)  # shuffle(r)
+        return dict(zip(choices(colors)[0], r))
 
     def fill(self) -> str:
         """
         Manipulating dictionary of color strings with their respective amounts.
         :rtype: str
         """
-        rio = sample(list(self.out.items()), 1)[0][0]
-        dio = {k: v - 1 if k == rio else self.out[k] for k, v in self.out.items()}
-        self.out = {k: v for k, v in dio.items() if v}
-        return rio
+        r = choices(list(self.out), k=1)[0]
+        d = {k: v - 1 if k == r else self.out[k] for k, v in self.out.items()}
+        self.out = {k: v for k, v in d.items() if v}
+        return r
 
 
 class ReaderPNG:
@@ -385,13 +382,11 @@ class ReaderPNG:
             info["bitdepth"] = 8
             info["planes"] = 3 + bool(self.trns)
             plte = self.palette()
-
             def iterpal(pix):
                 for row in pix:
                     row = [plte[z] for z in row]
                     k = [i for sub in list(zip(*row)) for i in sub]
                     yield k
-
             pixels = iterpal(pixels)
         targetbitdepth = None
         if self.sbit:
@@ -404,11 +399,9 @@ class ReaderPNG:
         if targetbitdepth:
             shift = info["bitdepth"] - targetbitdepth
             info["bitdepth"] = targetbitdepth
-
             def itershift(pxs):
                 for row in pxs:
                     yield [p >> shift for p in row]
-
             pixels = itershift(pixels)
         return x, y, pixels, info
 
@@ -472,7 +465,7 @@ class BitReader:
         self.pos = 0
         self.b = 0
         self.numbits = 0
-        self.root = type("Node", (object,), {"symbol": "", "left": None, "right": None})()
+        self.root = type("Node", (object,), {"symbol": "", "left": None, "right": None})()  # Compacted
         self.root.symbol = ""
 
     def insert(self, codeword, n, symbol):
@@ -564,7 +557,6 @@ class BitReader:
                 bl.extend(0 for _ in range(repeat_length))
             else:
                 raise Exception("invalid symbol")
-
         literal_length_tree = self.bl_list_to_tree(bl[:hlit], range(286))
         distance_tree = self.bl_list_to_tree(bl[hlit:], range(30))
         return literal_length_tree, distance_tree
