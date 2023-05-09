@@ -11,7 +11,7 @@ export const log = () => {
     console.log.apply(JSON.stringify(console), arguments);
 }
 
-export sleep = async (s) => {
+export const sleep = async (s) => {
     return new Promise(res => setTimeout(res, s));
 }
 
