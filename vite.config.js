@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react"
 import copy from "rollup-plugin-copy"
 import csp from "vite-plugin-csp"
 // import million from "million/compiler"
-
+// https://github.com/oven-sh/bun/issues/43
 
 export default defineConfig({
   /**
