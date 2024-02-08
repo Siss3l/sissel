@@ -57,8 +57,8 @@ export default defineConfig({
           "'sha512-z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg=='", // Empty hash
           "'sha512-j6tSXa6Yx/Whp8ra7DfhmbyBA4iNAx/s1lhqcbsMDBJU4B6IIw4aHBGS060qkgsD5sOSNndJoxkNLA1r/pA+eg=='", // width dynamic
           "'sha512-5V+mbF/yWInmfBAKEzYB4X1Y4JTGx05EuyO4aG4DiEv6FiuW9aF5/dGaBfnOhXS/Tg9kTnwLPxEf6ilCG7p9aA=='", // .xterm-bg-1
-          "'sha512-AVUwX86yevxWTFF5S3pXmfyvu2psSDt4AVQnfwl2VbAH6oUAPCxqB5p9W7V6TTmL3NmUkoTjHgZZBYhAEOntxw=='", // 8px on Firefox
-          "'sha256-Ot28rRDpuBkn69l5TRxj02UcsadcuEWPGelNYsmzUkA='" // For some MacOS
+          "'sha512-AVUwX86yevxWTFF5S3pXmfyvu2psSDt4AVQnfwl2VbAH6oUAPCxqB5p9W7V6TTmL3NmUkoTjHgZZBYhAEOntxw=='", // 8px Firefox
+          "'sha256-Ot28rRDpuBkn69l5TRxj02UcsadcuEWPGelNYsmzUkA='", "'unsafe-inline'" // On MacOS
         ],
         "worker-src": ["'self'"],
         "require-trusted-types-for": ["'script'"],
