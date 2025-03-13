@@ -3,8 +3,8 @@ import { VitePWA } from "vite-plugin-pwa"
 import react from "@vitejs/plugin-react"
 import copy from "rollup-plugin-copy"
 import csp from "vite-plugin-csp"
-// import million from "million/compiler"
-// https://github.com/oven-sh/bun/issues/43
+// https://bun.sh | https://github.com/denoland/deno | ts-go
+// https://pages.cloudflare.com
 
 export default defineConfig({
   /**
