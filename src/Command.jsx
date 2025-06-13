@@ -14,7 +14,7 @@ const commands = {
         f: () => {
             self.term.write(`\x07\n🔊\n>>> `);
         },
-        description: i18next?.t("help.audio") || "To play a sound"
+        description: () => i18next?.t("help.audio")
     },
     cat: {
         f: (command) => {
@@ -121,7 +121,7 @@ const commands = {
                 QYCNkQmAmaE5gL31xYDRKfmAhe35gNmUyYCQ7TDJgI39aYChPXGAjaH5gK2FiYCI9XGAzT0hgKTI/YCRQKGAjcHRgM1NpYChRfmAybVRgJDZOYCRUPGAuJzJgJEI0YCNkfmA5SVpgLTt7YDw4T2Aje2dgKVQvYEE9JmAgM0pgI2J+YDFwfmAzInRgI2J+YDI8I2A3KVpgSG1+YDdKbWAgP35gIk9+YDZ4a2BNbnVgPEZcYD50amA9aWhgUX9DYDZlfmAiKn5gSDJ
                 0YEtuamAlS3VgNmV+YElsfmBILnNgIGZ+YFglYmA3MlFgRGxcYDZcfmBceX5gSylzYCJdfWBdZDNgI1x+YDE4emBhZX5gXFRVYCdJcGBiQ0BgRF9+YGJxbWBmUX5gYkluYE1MV2BnI0xgRG5pYEFNfmA/PX5gayBnYE1FVmAkOk1gWzB+YG9vfmBwd35gXmJ+YChVfmAoVX5gdSJ+YChVfmAoVX5gMi1+YDItfmB5YX5gMi1+YDJNXmBARH5gO2V+YHlhfmA7ZX5
                 gPDVOYEU9fmBudH5geWF+YF02fmBFYVpgTm9+YE5vfmBOb35geV5+YGcgVWBYPX5gWD1+YFg9fmBeYn5gcD9kYGFvfmBhb35gYW9+YGFvfmBmZHNga0V+YGtFfmBsZ35gbnd+YHR1fmB0dX5geWd+YHR1fmB0enlgeVp+YFtLbGBmZH5geVp+YDZlfmAoSX5gUVx+YHBVaGAoSX5gNmZ9YGthaGBqKX5gXmN+YC0+cmA2Z3xgcSBbYG50fmBxPn5gIXt+YDc5SmB
-                jU35geihUYHR1fmAoPm1gIj1pYHcyPWBwaD9gQ1R2YDJYaWB5YX5geXFHYCI8d2BwR2BgdC9pYHVeaWB5YX5geXFHYHYlaWBwKX5gfGR+YHlhfmAgZn5gcF59MG0=`.trim();
+                jU35geihUYHR1fmAoPm1gIj1pYHcyPWBwaD9gQ1R2YDJYaWB5YX5geXFHYCI8d2BwR2BgdC9pYHVeaWB5YX5geXFHYHYlaWBwKX5gfGR+YHlhfmAgZn5gcF59MG0=`.trim(); // XSS
                 const lz = decompressLZ77(window.atob(demoSVG))?.replace(/[.]/gm, "\x1b") || ""; // no URL here
                 if (lz) {
                     self.term.write(`\n${lz}\n\r>>> `);
@@ -132,9 +132,9 @@ const commands = {
     },
     help: {
         f: () => {
-            self.term.write(`\n${i18next?.t("help.alpha")}:\n • ${Object.keys(commands)?.map((key) => `\x1b[1m${key}\x1b[0m => ${commands[key]?.description}\n`)?.join(" • ")}\r>>> `);
+            self.term.write(`\n${i18next?.t("help.alpha")}:\n • ${Object.keys(commands)?.map((key) => `\x1b[1m${key}\x1b[0m => ${commands[key]?.description()}\n`)?.join(" • ")}\r>>> `);
         },
-        description: i18next?.t("help.help")
+        description: () => i18next?.t("help.help")
     },
     lang: {
         f: (command) => {
