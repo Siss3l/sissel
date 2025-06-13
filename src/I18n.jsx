@@ -5,9 +5,8 @@ import {initReactI18next} from "react-i18next"
 
 i18n.use(LanguageDetector).use(initReactI18next).init({
     /**
-     * Internationalisation and Localisation are used to provide
-     * appropriate translation with web browser language detection.
-     *
+     * Internationalisation and Localisation are used to provide appropriate translation with web browser language detection.
+     * Switching directly the language of the browser may not translate subcommands.
      * @default Promise
      */
     detection: {},
@@ -208,7 +207,7 @@ i18n.use(LanguageDetector).use(initReactI18next).init({
             translation: {
                 home: `Welkom bij de Python-webterminalemulator op Pyodide via WebAssembly in ${new Date().getFullYear()} ⚙️\nEr is ook een SVG-avatargenerator beschikbaar door de opdracht gen (vermeld in de help) hieronder te typen`,
                 help: {
-                    alpha: "Typ help() voor interactieve hulp of help(object) voor hulp over het object.\n\n",
+                    alpha: "Typ help() voor interactieve hulp of help(object) voor hulp over het object.\n\nLijst met opdrachten",
                     audio: "Opsomming van commando's",
                     cat: "Een standaardhulpprogramma dat bestanden opeenvolgend leest",
                     cd: "Een opdrachtregel-shell-opdracht die wordt gebruikt om de huidige werkdirectory te wijzigen",
